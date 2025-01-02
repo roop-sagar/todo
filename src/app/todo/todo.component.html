@@ -1,0 +1,59 @@
+<div class="header">
+  <h1>Todo List</h1>
+</div>
+<div class="todo-app">
+  <div class="todo-input-container">
+    <input
+      type="text"
+      class="todo-input"
+      placeholder="Enter Title"
+      autocomplete="off"
+      [(ngModel)]="title"
+    />
+    <textarea
+      class="todo-input"
+      style="resize: none;"
+      placeholder="Enter Description"
+      autocomplete="off"
+      [(ngModel)]="description"
+    ></textarea>
+    <button
+      type="button"
+      class="todo-add-btn"
+      [innerText]="buttonValue"
+      (click)="addTodo()"
+      [disabled]="!title"
+    ></button>
+  </div>
+
+  <ul class="todo-list">
+    <li class="todo-item" *ngFor="let todo of todoList">
+      <span class="todo-text">
+        <strong>{{ todo.title }}</strong>
+        <span [innerHTML]="getHtml(todo.description)"></span>
+      </span>
+      <button
+        type="button"
+        class="todo-edit-btn"
+        (click)="editTodo(todo.id)"
+        *ngIf="!todo.isCompleted"
+      >
+        <span class="material-icons">edit</span>
+      </button>
+      <button
+        type="button"
+        class="todo-remove-btn"
+        (click)="removeTodo(todo.id)"
+      >
+        <span class="material-icons">delete</span>
+      </button>
+      <button
+        type="button"
+        [ngClass]="todo.isCompleted ? 'todo-completed-btn' : 'todo-pending-btn'"
+        (click)="completeTodo(todo.id)"
+      >
+        <span class="material-icons">task_alt</span>
+      </button>
+    </li>
+  </ul>
+</div>
