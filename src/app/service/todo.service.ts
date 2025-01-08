@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TodoList } from '../todo.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +9,8 @@ export class TodoService {
 
   constructor() { }
 
-  getTodos(): TodoList[] {
-    const todos = localStorage.getItem('todos') || '[]';
-    return JSON.parse(todos) || [];
+  getTodos(): Observable<TodoList[]> {
+    return of(JSON.parse(localStorage.getItem('todos') || '[]'));
   }
 
   saveToLocal(todoList: TodoList[]) {

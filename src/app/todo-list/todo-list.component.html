@@ -1,0 +1,28 @@
+<div class="todo-item">
+  <span class="todo-text">
+    <strong>{{ todo.title }}</strong>
+    <span [innerHTML]="getHtml(todo.description)"></span>
+  </span>
+  <button
+    type="button"
+    class="todo-edit-btn"
+    (click)="todoAction('edit')"
+    *ngIf="!todo.isCompleted"
+  >
+    <span class="material-icons">edit</span>
+  </button>
+  <button
+    type="button"
+    class="todo-remove-btn"
+    (click)="todoAction('delete')"
+  >
+    <span class="material-icons">delete</span>
+  </button>
+  <button
+    type="button"
+    [ngClass]="todo.isCompleted ? 'todo-completed-btn' : 'todo-pending-btn'"
+    (click)="todoAction('markAsComplete')"
+  >
+    <span class="material-icons">task_alt</span>
+  </button>
+</div>
